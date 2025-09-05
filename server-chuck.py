@@ -16,12 +16,12 @@ def main(port: int):
     )
 
     @mcp.tool()
-    def get_joke():
+    def get_joke() -> str:
         """
         Get me a Chuck Norris Joke
         """
         try:
-            response = httpx.get("https://api.chucknorris.io/jokes/random", timeout=10.0)
+            response = httpx.get("https://api.chucknorris.io/jokes/random?category=movie", timeout=10.0)
             response.raise_for_status()
             return str(response.json()['value'].replace('\n', ''))
         except httpx.HTTPError as exc:
